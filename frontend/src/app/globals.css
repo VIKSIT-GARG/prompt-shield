@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme tokens ─────────────────────────────────────────────────── */
+:root {
+  --bg:          #f8fafc;
+  --bg2:         #f1f5f9;
+  --bg3:         #e2e8f0;
+  --card:        #ffffff;
+  --border:      rgba(0,0,0,0.08);
+  --border2:     rgba(0,0,0,0.12);
+  --text:        #0f172a;
+  --text2:       #475569;
+  --text3:       #94a3b8;
+  --accent:      #0ea5e9;
+  --accent-dim:  rgba(14,165,233,0.12);
+  --accent-glow: rgba(14,165,233,0.20);
+  --safe:        #10b981;
+  --suspicious:  #f59e0b;
+  --malicious:   #ef4444;
+  --user-bubble: #4f46e5;
+  --scrollbar:   rgba(0,0,0,0.12);
+}
+
+.dark {
+  --bg:          #070b12;
+  --bg2:         #0d1117;
+  --bg3:         #161c27;
+  --card:        #111827;
+  --border:      rgba(255,255,255,0.06);
+  --border2:     rgba(255,255,255,0.10);
+  --text:        #f1f5f9;
+  --text2:       #94a3b8;
+  --text3:       #4b5563;
+  --accent:      #0ea5e9;
+  --accent-dim:  rgba(14,165,233,0.10);
+  --accent-glow: rgba(14,165,233,0.15);
+  --user-bubble: #4f46e5;
+  --scrollbar:   rgba(255,255,255,0.08);
+}
+
+/* ── Reset ────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html, body, #__next { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), sans-serif;
+  min-height: 100vh;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(14,165,233,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 85% 85%, rgba(99,102,241,0.04) 0%, transparent 70%);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 2px; }
+
+/* ── Utilities ────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.dark .glass {
+  background: rgba(255,255,255,0.03);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.glow-safe       { box-shadow: 0 0 20px rgba(16,185,129,0.12); }
+.glow-suspicious { box-shadow: 0 0 20px rgba(245,158,11,0.12); }
+.glow-malicious  { box-shadow: 0 0 20px rgba(239,68,68,0.15); }
+
+/* ── Animations ───────────────────────────────────────────────────── */
+@keyframes pulseDot {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%     { opacity:0.4; transform:scale(0.75); }
+}
+.pulse-dot { animation: pulseDot 2s ease infinite; }
+
+@keyframes scanBeam {
+  0%   { top:0%;   opacity:0.9; }
+  100% { top:100%; opacity:0; }
+}
+.scan-beam {
+  position:absolute; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scanBeam 1.6s linear infinite;
+}
+
+@keyframes bounce {
+  0%,80%,100% { transform:scale(0); }
+  40%         { transform:scale(1); }
+}
+.typing span {
+  display:inline-block; width:5px; height:5px; border-radius:50%;
+  background:currentColor;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.typing span:nth-child(1){ animation-delay:-0.32s; }
+.typing span:nth-child(2){ animation-delay:-0.16s; }
+
+.score-ring { stroke-linecap:round; }
+.bg-gradient-radial { background-image: radial-gradient(var(--tw-gradient-stops)); }

@@ -1,0 +1,14 @@
+node_modules/
+.next/
+__pycache__/
+*.pyc
+*.pyo
+.env.local
+*.pkl
+venv/
+.venv/
+dist/
+build/
+
+
+dataset/attack_logs/*.jsonl
